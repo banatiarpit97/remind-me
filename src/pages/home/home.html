@@ -1,17 +1,52 @@
-<ion-header>
+<ion-header class='headerBg'>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title class="title" [ngClass] = "{'upMargin':!noEvent}"><img src="assets/imgs/todo.png" class="title_img">Remind Me!</ion-title>
+    <button ion-button clear icon-only (click)='deleteAll()' class="deleteAll" color='danger' *ngIf='!noEvent' >
+      <ion-icon name="trash"></ion-icon>
+    </button>
+
+    <ion-searchbar (ionInput)="getItems($event)" id='search' ></ion-searchbar>
+
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content no-padding class="background" (swipe)='swipe($event)'>
+
+  <ion-segment [(ngModel)] = 'segment'>
+    <ion-segment-button (click)='allEvents()' value='all'>
+      All
+    </ion-segment-button>
+    <ion-segment-button (click)='todayEvents()' value='today'>
+      Today
+    </ion-segment-button>
+    <ion-segment-button (click)='tommorrowEvents()' value='tom'>
+      Tommorrow
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-card *ngIf = "noEvent">
+    <ion-card-content>
+      There are no pending events to show!
+    </ion-card-content>
+  </ion-card> 
+
+ <ng-container *ngFor="let item of items"> 
+  <ion-card *ngIf="item" (click)='openDetails(item)' (press)='editDelete(item)'>
+    <ion-card-header>
+      <h2 class="item_title">{{item.title}}</h2>
+      <div class="item_time">
+        <p>{{item.date}}</p>
+        <p>{{item.time}}</p>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <p class="item_description">{{item.description}}</p>
+    </ion-card-content>
+  </ion-card>
+ </ng-container>          
+   
+    <ion-fab bottom right class="add">
+      <button ion-fab (click) = "addEvent()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+
 </ion-content>

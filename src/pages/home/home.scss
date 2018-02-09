@@ -1,3 +1,77 @@
 page-home {
+   .item_title{
+   	// float: left;
+   	// margin-bottom: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      float: left;
+   }
+   .title_img{
+    height: 26px;
+    transform: translateY(3px);
+    margin-right: 5px;
+   }
+   .item_time{
+   	float: right;
+   	// font-size: 13px;
+   	color: grey;
+   }
+   .description{
+   	clear: both;
+   	// margin-top: 10px;
+   }
+   .title{
+      margin-top: 5px;
+      float: left;
+   }
+   .title .toolbar-title{
+      font-size: 30px;
+   }
+   .add{
+      opacity: 0.8;
+   }
+   .deleteAll{
+      margin-top: 10px;
+      margin-right: 15px;
+      float: right;
+   }
+   .background{
+      background-color:#f5f3f3;
+   }
+   .scroll-content{
+      margin-top: 120px !important;
+   }
+   .upMargin{
+      margin-top: 2.6%;
+   }
+   .item_description{
+    height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+   }
+   .searchbar-input-container{
+      margin-top: 7px;
+   }
+   .headerBg div.toolbar-background{
+      background-color:#d9ebf1;
+   }
+}
 
+.ios{
+   page-home{
+      .scroll-content{
+         top: 5%;
+      }
+      .scroll-content{
+      margin-top: 100px !important;
+      }
+      ion-searchbar{
+         margin-top: 33px;
+      }
+      .deleteAll{
+         margin-top: 4px;
+         margin-bottom:0;
+      }
+   }   
 }

@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{item.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+  	<ion-card-header>
+  		Description
+  	</ion-card-header>
+  	<ion-card-content>
+  		{{item.description}}
+  	</ion-card-content>
+  </ion-card>	
+
+  <ion-card>
+  	<ion-card-header>
+  		Due On
+  	</ion-card-header>	
+  	<ion-card-content>
+  		<p>{{item.date}}</p>
+  		<p>{{item.time}}</p>
+  	</ion-card-content>
+  </ion-card>		
+
+
+  <ion-card *ngIf = "item.repeat">
+    <ion-card-header>
+      Repetition
+    </ion-card-header>  
+    <ion-card-content>
+      <p>Every {{item.repeat}}</p>
+    </ion-card-content>
+  </ion-card>   
+</ion-content>
