@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, state } from '@angular/core';
 import { NavController, ModalController, Platform } from 'ionic-angular';
 import { AddeventPage} from "../addevent/addevent";
 import { Http } from "@angular/http";
@@ -13,7 +13,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ActionSheetController } from 'ionic-angular';
 import { Searchbar } from 'ionic-angular/components/searchbar/searchbar';
 
-
+import { CodePush, SyncStatus} from '@ionic-native/code-push';
 
 declare var $:any;
 
@@ -43,6 +43,7 @@ export class HomePage {
   searchEvent:any;
   loader;
   searchbar = false;
+  refresher;
 
   constructor(public navCtrl: NavController, 
               public modalCtrl:ModalController, 
@@ -52,7 +53,36 @@ export class HomePage {
               private localNotifications: LocalNotifications, 
               public actionSheetCtrl: ActionSheetController,
               public toastCtrl:ToastController,
-              public loadingCtrl:LoadingController) {
+              public loadingCtrl:LoadingController,
+              public CodePush:CodePush) {
+
+    // this.platform.ready().then(() => {
+      //  this.CodePush.sync({}, (progress) => {
+
+      //  }).subscribe((status) => {
+      //     if(status == SyncStatus.CHECKING_FOR_UPDATE){
+      //       alert('checking');
+      //     }
+      //    if (status == SyncStatus.DOWNLOADING_PACKAGE) {
+      //      alert('downloading');
+      //    }
+      //    if (status == SyncStatus.IN_PROGRESS) {
+      //      alert('progress');
+      //    }
+      //    if (status == SyncStatus.INSTALLING_UPDATE) {
+      //      alert('installing');
+      //    }
+      //    if (status == SyncStatus.UP_TO_DATE) {
+      //      alert('UPTO DATE');
+      //    }
+      //    if (status == SyncStatus.UPDATE_INSTALLED) {
+      //      alert('installed');
+      //    }
+      //    if (status == SyncStatus.ERROR) {
+      //      alert('error');
+      //    }
+      //  })
+    // })            
 
      this.loader = loadingCtrl.create({
       content: "Loading Todos"
@@ -306,6 +336,9 @@ export class HomePage {
     this.segment = "all";
     this.getItemsNoEvent();
     this.checkNull();
+    if (this.refresher) {
+      $("ion-card:last-child").css('margin-bottom', "80px");
+    }
   }
   todayEvents(){
     this.items = this.itemsCopy;
@@ -317,6 +350,9 @@ export class HomePage {
     this.segment = "today";
     this.getItemsNoEvent();
     this.checkNull();
+    if (this.refresher) {
+      $("ion-card:last-child").css('margin-bottom', "80px");
+    }
   }
   tommorrowEvents(){
     this.items = this.itemsCopy;
@@ -330,6 +366,32 @@ export class HomePage {
     this.segment = "tom";
     this.getItemsNoEvent();
     this.checkNull();
+    if (this.refresher) {
+      $("ion-card:last-child").css('margin-bottom', "80px");
+    }
+  }
+  showSearch(e){
+    console.log("show")
+    $("ion-card:last-child").css('margin-bottom', "80px");
+    $(".segment").css("margin-top", "0");
+    this.refresher = e;
+  }
+
+  closeSearch(e){
+      this.refresher.complete();
+      $("ion-card:last-child").css('margin-bottom', "10px");
+      $(".segment").css("margin-top", "4%");
+      this.refresher = null;
+    $('#search input').val("")
+      if (this.segment == "all") {
+        this.items = this.itemsCopy;
+      }
+      else if (this.segment == "today") {
+        this.todayEvents();
+      }
+      else if (this.segment == "tom") {
+        this.tommorrowEvents();
+      }
   }
 
 

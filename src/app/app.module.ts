@@ -11,8 +11,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { IonicStorageModule } from '@ionic/storage';
+import { CodePush } from '@ionic-native/code-push';
 
 import { HttpModule } from '@angular/http';
+
 
 @NgModule({
   declarations: [
@@ -39,8 +41,8 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpModule,
-    LocalNotifications
-    
+    LocalNotifications,
+    CodePush
   ]
 })
 export class AppModule {}

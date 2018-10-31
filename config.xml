@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="remind.me" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <platform name="android">
+        <preference name="CodePushDeploymentKey" value="l0GxyFil-Cjan7VYVPaK2E6IGxZX9232952e-9673-4aaa-a766-5917a7c7675e" />
+    </platform>
     <name>Remind Me!</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>An app that lets you manage your todos and notes.</description>
+        <author email="arpit@banati.in" href="http://banati.thecompletewebhosting.com/">Arpit Banati</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -84,5 +87,8 @@
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
     <allow-navigation href="http://192.168.1.2:8101" />
     <allow-navigation href="http://192.168.1.2:8100" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <plugin name="cordova-plugin-zip" spec="^3.1.0" />
+    <plugin name="cordova-plugin-code-push" spec="^1.11.3" />
     <engine name="android" spec="~7.0.0" />
 </widget>

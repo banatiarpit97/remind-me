@@ -5,14 +5,19 @@
       <ion-icon name="trash"></ion-icon>
     </button>
 
-    <ion-searchbar (ionInput)="getItems($event)" id='search' ></ion-searchbar>
+    <!-- <ion-searchbar (ionInput)="getItems($event)" id='search' ></ion-searchbar> -->
 
   </ion-navbar>
 </ion-header>
 
 <ion-content no-padding class="background" (swipe)='swipe($event)'>
 
-  <ion-segment [(ngModel)] = 'segment'>
+  <ion-refresher (ionRefresh) = "showSearch($event)">
+    <ion-searchbar (ionInput)="getItems($event)" id='search'></ion-searchbar>
+    <ion-icon name='close-circle' class="close-search" (click)="closeSearch($event)"></ion-icon>
+  </ion-refresher>
+
+  <ion-segment [(ngModel)] = 'segment' class="segment">
     <ion-segment-button (click)='allEvents()' value='all'>
       All
     </ion-segment-button>
